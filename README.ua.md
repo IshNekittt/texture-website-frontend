@@ -19,7 +19,7 @@
 
 ```bash
 git clone texture-website-frontend
-cd pixel-textures-frontend
+cd texture-website-frontend
 ```
 
 ### 2. Встановлення залежностей

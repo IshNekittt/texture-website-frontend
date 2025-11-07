@@ -19,7 +19,7 @@
 
 ```bash
 git clone https://github.com/IshNekittt/texture-website-frontend.git
-cd pixel-textures-frontend
+cd texture-website-frontend
 ```
 
 ### 2. Установка зависимостей

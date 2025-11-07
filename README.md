@@ -19,7 +19,7 @@ This is the client-side of the "Pixel Textures" web application, built with Reac
 
 ```bash
 git clone https://github.com/IshNekittt/texture-website-frontend.git
-cd pixel-textures-frontend
+cd texture-website-frontend
 ```
 
 ### 2. Install Dependencies
