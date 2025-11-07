@@ -133,7 +133,12 @@ export default function TextureDetailPage() {
           <p className={styles.category}>
             {capitalizeFirstLetter(texture.categoryId?.categoryName)}
           </p>
-          <a href={downloadUrl} className={styles.downloadButton} download>
+          <a
+            href={downloadUrl}
+            className={styles.downloadButton}
+            target="_blank"
+            download
+          >
             <span>Download</span>
             <IoDownloadOutline size={22} className={styles.downloadIcon} />
           </a>
