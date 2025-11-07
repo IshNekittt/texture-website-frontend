@@ -1,0 +1,7 @@
+/* src/pages/CataloguePage/CataloguePage.module.css */
+
+.container {
+  max-width: 1600px; /* Обмежуємо максимальну ширину контенту */
+  margin: 0 auto; /* Центруємо контейнер */
+  padding: 0 20px; /* Відступи з боків */
+}

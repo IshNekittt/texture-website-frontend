@@ -1,0 +1,124 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  /* border-bottom: 1px solid var(--color-border); */
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.headerNav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.siteTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-decoration: none;
+  color: var(--color-text-primary);
+}
+
+.headerControls {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.searchWrapper {
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-background);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.searchWrapper:focus-within {
+  border-color: var(--color-accent-primary);
+  box-shadow: 0 0 0 1px var(--color-accent-primary);
+}
+
+.searchButton {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.searchIcon {
+  color: var(--color-text-secondary);
+  transition: color 0.2s ease;
+}
+
+.searchButton:hover .searchIcon {
+  color: var(--color-accent-primary);
+}
+
+.searchBar {
+  border: none;
+  background-color: transparent;
+  flex-grow: 1;
+  width: 100%;
+  padding: 8px 12px 8px 0;
+  color: var(--color-text-primary);
+  min-width: 200px;
+  outline: none;
+}
+
+.themeToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--color-border);
+  background-color: transparent;
+  color: var(--color-text-primary);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.themeToggle:hover {
+  background-color: var(--color-background);
+  color: var(--color-accent-primary);
+}
+
+.iconOffset {
+  transform: translateX(-0.5px);
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  padding: 8px;
+  margin-right: 8px;
+  border-radius: 50%;
+  transition: background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+}
+
+.backButton:hover {
+  background-color: var(--color-background);
+  color: var(--color-accent-primary);
+}
+
+.backButtonHidden {
+  display: none;
+  pointer-events: none;
+}

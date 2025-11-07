@@ -1,0 +1,69 @@
+/* src/pages/HomePage/HomePage.module.css */
+.heroContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #121212; /* Темний фон */
+  color: #ffffff;
+  padding: 2rem;
+  text-align: center;
+  overflow: hidden; /* Щоб анімація не виходила за межі */
+}
+
+.title {
+  font-size: 5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  margin-bottom: 3rem;
+  max-width: 600px;
+  line-height: 1.6;
+  color: #a0a0a0;
+}
+
+.ctaButton {
+  padding: 1rem 2.5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #121212;
+  background-color: #00bfff; /* Яскравий акцентний колір */
+  border: none;
+  border-radius: 50px; /* Овальна форма */
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ctaButton:hover {
+  transform: scale(1.05) translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 191, 255, 0.2);
+}
+
+/* Стилізація GIF-фону (якщо ви вирішите додати) */
+.backgroundGif {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Повністю покриває контейнер */
+  z-index: 0;
+  opacity: 0.1; /* Робимо його напівпрозорим */
+}
+
+.content {
+  position: relative; /* Щоб контент був поверх GIF */
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

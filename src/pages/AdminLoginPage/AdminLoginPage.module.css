@@ -1,0 +1,115 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--color-background);
+}
+
+.form {
+  width: 100%;
+  max-width: 400px;
+  padding: 40px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  [data-theme="dark"] & {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  }
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 8px;
+  color: var(--color-text-primary);
+}
+
+.subtitle {
+  text-align: center;
+  margin-bottom: 32px;
+  color: var(--color-text-secondary);
+}
+
+.inputWrapper {
+  margin-bottom: 24px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+.input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  font-size: 1rem;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-accent-primary);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+  [data-theme="dark"] & {
+    box-shadow: 0 0 0 3px rgba(0, 191, 255, 0.2);
+  }
+}
+
+.error {
+  margin-top: 8px;
+  color: #ff4d4d;
+  font-size: 0.875rem;
+}
+
+.buttonGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.button {
+  width: 100%;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease,
+    border-color 0.2s ease;
+  text-align: center;
+}
+
+.button[type="submit"] {
+  color: #fff;
+  background-color: var(--color-accent-primary);
+  border: 1px solid var(--color-accent-primary);
+}
+.button[type="submit"]:hover {
+  background-color: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+}
+.button[type="submit"]:disabled {
+  background-color: var(--color-text-secondary);
+  border-color: var(--color-text-secondary);
+  cursor: not-allowed;
+}
+
+.backButton {
+  color: var(--color-text-secondary);
+  background-color: transparent;
+  border: 1px solid var(--color-border);
+}
+
+.backButton:hover {
+  color: var(--color-text-primary);
+  border-color: var(--color-text-primary);
+}
