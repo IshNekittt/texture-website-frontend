@@ -6,10 +6,9 @@
 }
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: "Poppins", sans-serif;
   background: #f5f7fa;
   color: #333;
-  
 }
 .logo {
   height: 6em;
@@ -46,4 +45,3 @@ body {
 .read-the-docs {
   color: #888;
 }
-
