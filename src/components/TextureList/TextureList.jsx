@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"; // 1. Імпортуємо Link
+import { Link } from "react-router-dom";
 import styles from "./TextureList.module.css";
 
 const TextureCard = ({ texture }) => {
@@ -29,7 +29,6 @@ export default function TextureList({ textures }) {
   return (
     <div className={styles.list}>
       {textures.map((texture) => (
-        // 2. Огортаємо кожну картку в Link
         <Link
           key={texture._id}
           to={`/catalogue/${texture._id}`}

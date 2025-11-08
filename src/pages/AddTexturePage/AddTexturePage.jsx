@@ -9,10 +9,7 @@ export default function AddTexturePage() {
   const navigate = useNavigate();
 
   const handleCreateTexture = async (textureData) => {
-    // Відправляємо операцію створення
     const resultAction = await dispatch(createTexture(textureData));
-
-    // Якщо операція успішна, повертаємося на дашборд
     if (createTexture.fulfilled.match(resultAction)) {
       navigate("/admin/dashboard");
     }

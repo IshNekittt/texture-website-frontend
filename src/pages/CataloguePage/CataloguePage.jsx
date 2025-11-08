@@ -1,4 +1,3 @@
-// src/pages/CataloguePage/CataloguePage.jsx
 import { useEffect, useRef, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -25,7 +24,6 @@ export default function CataloguePage() {
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
-    // Якщо це не перша сторінка, ми не очищуємо
     if ((searchParams.get("page") || "1") === "1") {
       dispatch(clearTextures());
     }

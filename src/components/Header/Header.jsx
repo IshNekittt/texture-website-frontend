@@ -1,4 +1,3 @@
-// src/components/Header/Header.jsx
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -16,7 +15,7 @@ export default function Header() {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
-  const { textureId } = useParams(); // ПОВЕРТАЄМО useParams
+  const { textureId } = useParams();
 
   const [localSearchQuery, setLocalSearchQuery] = useState("");
   const currentTheme = useSelector(selectTheme);
@@ -40,7 +39,6 @@ export default function Header() {
     navigate(`/catalogue?${searchParams.toString()}`);
   };
 
-  // ПОВЕРТАЄМО ЛОГІКУ ВИЗНАЧЕННЯ, ЧИ ПОТРІБНО ПОКАЗУВАТИ КНОПКУ
   const showBackButton = !!textureId;
   const handleGoBack = () => navigate("/catalogue");
   const handleThemeToggle = () => dispatch(toggleTheme());
@@ -50,7 +48,6 @@ export default function Header() {
       <div className={styles.headerNav}>
         <button
           onClick={handleGoBack}
-          // ВИКОРИСТОВУЄМО showBackButton ДЛЯ УМОВНОГО ЗАСТОСУВАННЯ КЛАСУ
           className={clsx(
             styles.backButton,
             !showBackButton && styles.backButtonHidden

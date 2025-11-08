@@ -1,15 +1,14 @@
-/* src/pages/HomePage/HomePage.module.css */
 .heroContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #121212; /* Темний фон */
+  background-color: #121212;
   color: #ffffff;
   padding: 2rem;
   text-align: center;
-  overflow: hidden; /* Щоб анімація не виходила за межі */
+  overflow: hidden;
 }
 
 .title {
@@ -33,9 +32,9 @@
   font-size: 1.2rem;
   font-weight: 600;
   color: #121212;
-  background-color: #00bfff; /* Яскравий акцентний колір */
+  background-color: #00bfff;
   border: none;
-  border-radius: 50px; /* Овальна форма */
+  border-radius: 50px;
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -47,20 +46,19 @@
   box-shadow: 0 10px 20px rgba(0, 191, 255, 0.2);
 }
 
-/* Стилізація GIF-фону (якщо ви вирішите додати) */
 .backgroundGif {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Повністю покриває контейнер */
+  object-fit: cover;
   z-index: 0;
-  opacity: 0.1; /* Робимо його напівпрозорим */
+  opacity: 0.1;
 }
 
 .content {
-  position: relative; /* Щоб контент був поверх GIF */
+  position: relative;
   z-index: 1;
   display: flex;
   flex-direction: column;

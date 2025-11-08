@@ -1,4 +1,3 @@
-// src/components/Filters/Filters.jsx
 import { useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 import clsx from "clsx";

@@ -1,4 +1,3 @@
-// src/redux/textures/slice.js
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 import {
   fetchTextures,

@@ -35,7 +35,7 @@ const categoriesSlice = createSlice({
         state.currentItem = action.payload;
       })
       .addCase(createCategory.fulfilled, (state, action) => {
-        state.items.push(action.payload); // Додаємо в кінець, сортування на сервері
+        state.items.push(action.payload);
       })
       .addCase(updateCategory.fulfilled, (state, action) => {
         const index = state.items.findIndex(

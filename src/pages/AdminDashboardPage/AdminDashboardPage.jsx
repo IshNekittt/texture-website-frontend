@@ -80,7 +80,6 @@ export default function AdminDashboardPage() {
         </button>
       </div>
 
-      {/* === TEXTURES SECTION === */}
       <div className={styles.sectionHeader}>
         <h2>Textures</h2>
         <button onClick={handleAddTexture} className={styles.addButton}>
@@ -157,7 +156,6 @@ export default function AdminDashboardPage() {
         </table>
       </div>
 
-      {/* === CATEGORIES SECTION === */}
       <div className={styles.sectionHeader}>
         <h2>Categories</h2>
         <button onClick={handleAddCategory} className={styles.addButton}>
