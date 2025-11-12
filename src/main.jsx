@@ -19,6 +19,36 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         </PersistGate>
       </Provider>
     </BrowserRouter>
-    <Toaster position="top-center" />
+    <Toaster
+      position="top-center"
+      toastOptions={{
+        style: {
+          background: "var(--color-surface)",
+          color: "var(--color-text-primary)",
+          border: "1px solid var(--color-border)",
+          borderRadius: "8px",
+          padding: "16px",
+        },
+
+        iconTheme: {
+          primary: "var(--color-accent-primary)",
+          secondary: "var(--color-surface)",
+        },
+
+        loading: {
+          iconTheme: {
+            primary: "var(--color-accent-primary)",
+            secondary: "var(--color-border)",
+          },
+        },
+
+        error: {
+          iconTheme: {
+            primary: "var(--color-cancel)",
+            secondary: "var(--color-surface)",
+          },
+        },
+      }}
+    />
   </React.StrictMode>
 );

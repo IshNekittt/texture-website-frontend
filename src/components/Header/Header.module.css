@@ -23,6 +23,11 @@
   letter-spacing: 2px;
   text-decoration: none;
   color: var(--color-text-primary);
+  transition: color 0.2s ease;
+}
+
+.siteTitle:hover {
+  color: var(--color-accent-primary);
 }
 
 .headerControls {

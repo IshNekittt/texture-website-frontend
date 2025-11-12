@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import clsx from "clsx";
-import { IoDownloadOutline } from "react-icons/io5";
+import { IoDownloadOutline, IoClose } from "react-icons/io5";
+import { File } from "megajs";
 
 import { fetchTextureById } from "../../redux/textures/operations";
 import { clearCurrentTexture } from "../../redux/textures/slice";
@@ -26,27 +27,6 @@ const formatDate = (dateString) => {
   });
 };
 
-const getDownloadUrl = (url) => {
-  if (!url) return "";
-
-  if (url.includes("drive.google.com")) {
-    const match = url.match(/\/d\/(.*?)\/view/);
-    if (match && match[1]) {
-      const fileId = match[1];
-      return `https://drive.google.com/uc?export=download&id=${fileId}`;
-    }
-  }
-
-  if (url.includes("cloudinary.com")) {
-    const parts = url.split("/upload/");
-    if (parts.length === 2 && !url.includes("fl_attachment")) {
-      return `${parts[0]}/upload/fl_attachment/${parts[1]}`;
-    }
-  }
-
-  return url;
-};
-
 export default function TextureDetailPage() {
   const { textureId } = useParams();
   const dispatch = useDispatch();
@@ -56,6 +36,18 @@ export default function TextureDetailPage() {
   const error = useSelector(selectTexturesError);
 
   const [selectedImage, setSelectedImage] = useState(null);
+  const [isDownloading, setIsDownloading] = useState(false);
+
+  const downloadStreamRef = useRef(null);
+  const toastIdRef = useRef(null);
+
+  useEffect(() => {
+    return () => {
+      if (downloadStreamRef.current) {
+        downloadStreamRef.current.destroy();
+      }
+    };
+  }, []);
 
   useEffect(() => {
     dispatch(fetchTextureById(textureId));
@@ -81,6 +73,79 @@ export default function TextureDetailPage() {
     }
   }, [error]);
 
+  const handleDownload = async () => {
+    if (!texture || !texture.fileUrl || isDownloading) return;
+
+    if (texture.fileUrl.includes("mega.nz")) {
+      toastIdRef.current = toast.loading("Preparing download...");
+
+      try {
+        const file = File.fromURL(texture.fileUrl);
+        await file.loadAttributes();
+
+        setIsDownloading(true);
+        toast.loading(`Downloading "${file.name}"...`, {
+          id: toastIdRef.current,
+        });
+
+        const downloadedBlob = await new Promise((resolve, reject) => {
+          const stream = file.download();
+          downloadStreamRef.current = stream;
+          const chunks = [];
+
+          stream.on("data", (chunk) => {
+            chunks.push(chunk);
+          });
+
+          stream.on("end", () => {
+            downloadStreamRef.current = null;
+            resolve(new Blob(chunks));
+          });
+
+          stream.on("error", (err) => {
+            downloadStreamRef.current = null;
+            reject(err);
+          });
+        });
+
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(downloadedBlob);
+        link.download = file.name || "download.zip";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(link.href);
+
+        toast.success(`Downloaded successfully!`, {
+          id: toastIdRef.current,
+        });
+      } catch (err) {
+        if (
+          !err.message?.includes(
+            "Cannot call write after a stream was destroyed"
+          )
+        ) {
+          toast.error("Failed to download from MEGA", {
+            id: toastIdRef.current,
+          });
+        }
+      } finally {
+        setIsDownloading(false);
+        downloadStreamRef.current = null;
+        toastIdRef.current = null;
+      }
+    } else {
+      toast.error("Unsupported file URL for download");
+    }
+  };
+
+  const handleCancel = () => {
+    if (downloadStreamRef.current) {
+      downloadStreamRef.current.destroy();
+      toast.success("Canceled successfully!", { id: toastIdRef.current });
+    }
+  };
+
   if (isLoading || !texture) {
     return <Loader isLoading={true} />;
   }
@@ -88,8 +153,6 @@ export default function TextureDetailPage() {
   if (texture._id !== textureId) {
     return <Loader isLoading={true} />;
   }
-
-  const downloadUrl = getDownloadUrl(texture.fileUrl);
 
   return (
     <div className={styles.container}>
@@ -132,15 +195,22 @@ export default function TextureDetailPage() {
           <p className={styles.category}>
             {capitalizeFirstLetter(texture.categoryId?.categoryName)}
           </p>
-          <a
-            href={downloadUrl}
-            className={styles.downloadButton}
-            target="_blank"
-            download
+
+          <button
+            onClick={isDownloading ? handleCancel : handleDownload}
+            className={clsx(
+              styles.downloadButton,
+              isDownloading && styles.cancelButton
+            )}
           >
-            <span>Download</span>
-            <IoDownloadOutline size={22} className={styles.downloadIcon} />
-          </a>
+            <span>{isDownloading ? "Cancel" : "Download"}</span>
+            {isDownloading ? (
+              <IoClose size={22} className={styles.downloadIcon} />
+            ) : (
+              <IoDownloadOutline size={22} className={styles.downloadIcon} />
+            )}
+          </button>
+
           <div className={styles.metaDetails}>
             <div className={styles.metaItem}>
               <span>Published</span>
