@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styles from "./TextureList.module.css";
 
 const TextureCard = ({ texture }) => {
@@ -18,6 +18,8 @@ const TextureCard = ({ texture }) => {
 };
 
 export default function TextureList({ textures }) {
+  const location = useLocation();
+
   if (!textures || textures.length === 0) {
     return (
       <p className={styles.emptyMessage}>
@@ -32,6 +34,7 @@ export default function TextureList({ textures }) {
         <Link
           key={texture._id}
           to={`/catalogue/${texture._id}`}
+          state={{ from: location }}
           className={styles.cardLink}
         >
           <TextureCard texture={texture} />

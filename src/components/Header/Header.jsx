@@ -40,7 +40,7 @@ export default function Header() {
   };
 
   const showBackButton = !!textureId;
-  const handleGoBack = () => navigate("/catalogue");
+  const handleGoBack = () => navigate(location.state?.from || "/catalogue");
   const handleThemeToggle = () => dispatch(toggleTheme());
 
   return (
