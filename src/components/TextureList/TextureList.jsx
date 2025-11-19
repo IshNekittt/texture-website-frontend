@@ -17,7 +17,7 @@ const TextureCard = ({ texture }) => {
   );
 };
 
-export default function TextureList({ textures }) {
+export default function TextureList({ textures, lastTextureRef }) {
   const location = useLocation();
 
   if (!textures || textures.length === 0) {
@@ -30,8 +30,9 @@ export default function TextureList({ textures }) {
 
   return (
     <div className={styles.list}>
-      {textures.map((texture) => (
+      {textures.map((texture, index) => (
         <Link
+          ref={textures.length === index + 1 ? lastTextureRef : null}
           key={texture._id}
           to={`/catalogue/${texture._id}`}
           state={{ from: location }}

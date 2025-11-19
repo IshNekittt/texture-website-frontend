@@ -1,6 +1,7 @@
 import { useEffect, useRef, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import toast from "react-hot-toast";
 import { fetchTextures } from "../../redux/textures/operations";
 import { clearTextures } from "../../redux/textures/slice";
 import {
@@ -16,18 +17,30 @@ import styles from "./CataloguePage.module.css";
 export default function CataloguePage() {
   const dispatch = useDispatch();
   const location = useLocation();
-  const navigate = useNavigate();
 
   const textures = useSelector(selectAllTextures);
   const isLoading = useSelector(selectTexturesIsLoading);
-  const { page, hasNextPage } = useSelector(selectTexturesPagination);
+  const { page, perPage, hasNextPage } = useSelector(selectTexturesPagination);
 
   useEffect(() => {
-    const searchParams = new URLSearchParams(location.search);
-    if ((searchParams.get("page") || "1") === "1") {
-      dispatch(clearTextures());
+    if (!hasNextPage && textures.length > 0) {
+      toast.success("You've reached the end of the list");
     }
-    dispatch(fetchTextures(Object.fromEntries(searchParams)));
+  }, [hasNextPage, textures.length]);
+
+  useEffect(() => {
+    dispatch(clearTextures());
+
+    const searchParams = new URLSearchParams(location.search);
+    const params = Object.fromEntries(searchParams);
+
+    dispatch(
+      fetchTextures({
+        ...params,
+        page,
+        perPage,
+      })
+    );
   }, [location.search, dispatch]);
 
   const observer = useRef();
@@ -38,13 +51,19 @@ export default function CataloguePage() {
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting && hasNextPage) {
           const searchParams = new URLSearchParams(location.search);
-          searchParams.set("page", page + 1);
-          navigate(`${location.pathname}?${searchParams.toString()}`);
+          const params = Object.fromEntries(searchParams);
+          dispatch(
+            fetchTextures({
+              ...params,
+              page: page + 1,
+              perPage,
+            })
+          );
         }
       });
       if (node) observer.current.observe(node);
     },
-    [isLoading, hasNextPage, navigate, location, page]
+    [isLoading, hasNextPage, dispatch, page, location.search]
   );
 
   return (
@@ -53,9 +72,6 @@ export default function CataloguePage() {
       <Loader isLoading={isLoading && textures.length === 0} />
       <TextureList textures={textures} lastTextureRef={lastTextureElementRef} />
       {isLoading && textures.length > 0 && <p>Loading more...</p>}
-      {!hasNextPage && textures.length > 0 && (
-        <p>You have reached the end of the list.</p>
-      )}
     </div>
   );
 }

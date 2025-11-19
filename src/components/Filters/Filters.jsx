@@ -38,15 +38,14 @@ export default function Filters() {
     } else {
       searchParams.set(key, value);
     }
-    searchParams.set("page", "1");
     navigate(`/catalogue?${searchParams.toString()}`);
   };
 
   const handleSortChange = (sortValue) => {
     const [sortBy, sortOrder] = sortValue.split("_");
     const searchParams = new URLSearchParams(location.search);
+    searchParams.set("sortBy", sortBy);
     searchParams.set("sortOrder", sortOrder);
-    searchParams.set("page", "1");
     navigate(`/catalogue?${searchParams.toString()}`);
   };
 
