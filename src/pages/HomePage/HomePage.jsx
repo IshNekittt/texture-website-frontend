@@ -206,7 +206,7 @@ export default function HomePage() {
       </section>
 
       <footer className={styles.footer}>
-        <p>&copy; {currentYear} Pixel. All rights reserved.</p>
+        <p>&copy; {currentYear} Pixel. All rights reserved</p>
       </footer>
     </div>
   );
