@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { FaCode, FaPaintBrush, FaCube, FaDatabase } from "react-icons/fa";
 import styles from "./HomePage.module.css";
+import bgImage from "../../assets/1.png";
+import bgImage2 from "../../assets/2.png";
 
 const teamMembers = [
   {
@@ -113,6 +115,11 @@ export default function HomePage() {
       <PixelHurricane />
 
       <section className={styles.heroSection}>
+        <div
+          className={styles.heroBackgroundImage}
+          style={{ backgroundImage: `url(${bgImage})` }}
+        />
+
         <div className={styles.heroContent}>
           <motion.h1
             className={styles.title}
@@ -161,6 +168,13 @@ export default function HomePage() {
           <div className={styles.arrowDown}>↓</div>
         </motion.div>
       </section>
+
+      <div
+        className={styles.parallaxDivider}
+        style={{ backgroundImage: `url(${bgImage2})` }}
+      >
+        <div className={styles.overlay} />
+      </div>
 
       <section className={styles.teamSection}>
         <motion.h2
