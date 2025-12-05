@@ -79,9 +79,9 @@ export default function Header() {
         </form>
         <button className={styles.themeToggle} onClick={handleThemeToggle}>
           {currentTheme === "light" ? (
-            <IoMoonOutline size={22} />
+            <IoSunnyOutline size={22} />
           ) : (
-            <IoSunnyOutline size={22} className={styles.iconOffset} />
+            <IoMoonOutline size={22} className={styles.iconOffset} />
           )}
         </button>
       </div>
